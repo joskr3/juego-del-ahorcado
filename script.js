@@ -13,11 +13,17 @@ let elementoFallos = document.getElementById("fallos");
 
 let elementoLetrasErroneas = document.getElementById("letrasErroneas");
 
-let mensajeFinal = document.getElementById("mensajeFinal");
+// let mensajeFinal = document.getElementById("mensajeFinal");
 
 const btnReiniciar = document.getElementById("btnReiniciar");
 
 const titulo = document.getElementsByTagName("h1")[0];
+
+const nuevoMensajeFinal = document.createElement("p");
+
+nuevoMensajeFinal.id = "mensajeFinal";
+
+nuevoMensajeFinal.textContent = "Mensaje Final: ";
 
 if (btnReiniciar) {
   btnReiniciar.addEventListener("click", iniciarJuego);
@@ -52,10 +58,12 @@ function actualizarDOM() {
     elementoLetrasErroneas.textContent = letrasErroneas.join(" ");
   }
 
-  if (mensajeFinal) {
-    mensajeFinal.textContent = "";
+  if (nuevoMensajeFinal) {
+    nuevoMensajeFinal.textContent = "";
   }
 }
+
+window.document.getElementsByTagName("body")[0].appendChild(nuevoMensajeFinal);
 
 window.addEventListener("DOMContentLoaded", iniciarJuego);
 
@@ -100,7 +108,7 @@ function revisarFinDeJuego() {
     // console.log(mensajeFinal, "Perdiste(1)");
     alert("Perdiste");
 
-    mensajeFinal.textContent = `Perdiste! La palabra era : ${palabraSecreta}`;
+    nuevoMensajeFinal.textContent = `Perdiste! La palabra era : ${palabraSecreta}`;
 
     titulo.style.color = "red";
 
@@ -110,7 +118,7 @@ function revisarFinDeJuego() {
   } else if (!estado.includes("_")) {
     titulo.style.color = "green";
     //console.log(mensajeFinal, "Ganaste(2)");
-    mensajeFinal.textContent = `Ganaste!!!`;
+    nuevoMensajeFinal.textContent = `Ganaste!!!`;
     //bloquearInteraccion();
     reiniciarJuego("Ganaste!!", 2000);
   }
