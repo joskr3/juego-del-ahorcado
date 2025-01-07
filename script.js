@@ -17,6 +17,8 @@ let mensajeFinal = document.getElementById("mensajeFinal");
 
 const btnReiniciar = document.getElementById("btnReiniciar");
 
+const titulo = document.getElementsByTagName("h1")[0];
+
 if (btnReiniciar) {
   btnReiniciar.addEventListener("click", iniciarJuego);
 }
@@ -24,7 +26,7 @@ if (btnReiniciar) {
 function iniciarJuego() {
   const indice = Math.floor(Math.random() * palabras.length);
   palabraSecreta = palabras[indice].toLocaleUpperCase();
-  // console.log(palabraSecreta)
+  console.log(palabraSecreta);
   // alert(palabraSecreta);
   estado = [];
 
@@ -87,15 +89,20 @@ function procesarLetra(letra) {
 
 function revisarFinDeJuego() {
   if (fallos >= maxFallos) {
-    if (mensajeFinal) {
-      mensajeFinal.textContent = `Perdiste! La palabra era : ${palabraSecreta}`;
-      //bloquearInteraccion();
-    }
+    console.log(mensajeFinal, "Perdiste(1)");
+    alert("Perdiste");
+
+    mensajeFinal.textContent = `Perdiste! La palabra era : ${palabraSecreta}`;
+
+    titulo.style.color = "red";
+
+    //bloquearInteraccion();
   } else if (!estado.includes("_")) {
-    if (mensajeFinal) {
-      mensajeFinal.textContent = `Ganaste!!!`;
-      //bloquearInteraccion();
-    }
+    titulo.style.color = "green";
+    console.log(mensajeFinal, "Ganaste(2)");
+
+    mensajeFinal.textContent = `Ganaste!!!`;
+    //bloquearInteraccion();
   }
 }
 
