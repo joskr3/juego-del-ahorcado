@@ -24,6 +24,7 @@ if (btnReiniciar) {
 }
 
 function iniciarJuego() {
+  titulo.style.color = "black";
   const indice = Math.floor(Math.random() * palabras.length);
   palabraSecreta = palabras[indice].toLocaleUpperCase();
   console.log(palabraSecreta);
@@ -87,22 +88,31 @@ function procesarLetra(letra) {
   revisarFinDeJuego();
 }
 
+function reiniciarJuego(texto, delay) {
+  setTimeout(() => {
+    alert(texto);
+    iniciarJuego();
+  }, delay);
+}
+
 function revisarFinDeJuego() {
   if (fallos >= maxFallos) {
-    console.log(mensajeFinal, "Perdiste(1)");
+    // console.log(mensajeFinal, "Perdiste(1)");
     alert("Perdiste");
 
     mensajeFinal.textContent = `Perdiste! La palabra era : ${palabraSecreta}`;
 
     titulo.style.color = "red";
 
+    reiniciarJuego("Perdiste!!", 4000);
+
     //bloquearInteraccion();
   } else if (!estado.includes("_")) {
     titulo.style.color = "green";
-    console.log(mensajeFinal, "Ganaste(2)");
-
+    //console.log(mensajeFinal, "Ganaste(2)");
     mensajeFinal.textContent = `Ganaste!!!`;
     //bloquearInteraccion();
+    reiniciarJuego("Ganaste!!", 2000);
   }
 }
 
