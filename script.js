@@ -17,12 +17,15 @@ let mensajeFinal = document.getElementById("mensajeFinal");
 
 const btnReiniciar = document.getElementById("btnReiniciar");
 
-btnReiniciar?.addEventListener("click", iniciarJuego);
+if (btnReiniciar) {
+  btnReiniciar.addEventListener("click", iniciarJuego);
+}
 
 function iniciarJuego() {
   const indice = Math.floor(Math.random() * palabras.length);
-  palabraSecreta = palabras[indice];
-  alert(palabraSecreta);
+  palabraSecreta = palabras[indice].toLocaleUpperCase();
+  // console.log(palabraSecreta)
+  // alert(palabraSecreta);
   estado = [];
 
   for (let index = 0; index < palabraSecreta.length; index++) {
@@ -34,9 +37,18 @@ function iniciarJuego() {
 }
 
 function actualizarDOM() {
-  estadoPalabra.textContent = estado.join(" ");
-  elementoFallos.textContent = fallos;
-  elementoLetrasErroneas.textContent = letrasErroneas.join(" ");
+  if (estadoPalabra) {
+    estadoPalabra.textContent = estado.join(" ");
+  }
+
+  if (elementoFallos) {
+    elementoFallos.textContent = fallos;
+  }
+
+  if (elementoLetrasErroneas) {
+    elementoLetrasErroneas.textContent = letrasErroneas.join(" ");
+  }
+
   if (mensajeFinal) {
     mensajeFinal.textContent = "";
   }
@@ -75,11 +87,15 @@ function procesarLetra(letra) {
 
 function revisarFinDeJuego() {
   if (fallos >= maxFallos) {
-    mensajeFinal.textContent = `Perdiste! La palabra era : ${palabraSecreta}`;
-    //bloquearInteraccion();
+    if (mensajeFinal) {
+      mensajeFinal.textContent = `Perdiste! La palabra era : ${palabraSecreta}`;
+      //bloquearInteraccion();
+    }
   } else if (!estado.includes("_")) {
-    mensajeFinal.textContent = `Ganaste!!!`;
-    //bloquearInteraccion();
+    if (mensajeFinal) {
+      mensajeFinal.textContent = `Ganaste!!!`;
+      //bloquearInteraccion();
+    }
   }
 }
 
